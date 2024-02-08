@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate",
+  "name": "c2e-store-service",
   "version": "1.0.0",
-  "description": "boilerplate",
+  "description": "c2e-store-service",
   "main": "index.js",
   "scripts": {
     "migrate": "npx sequelize-cli db:migrate",

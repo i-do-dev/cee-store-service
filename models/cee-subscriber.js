@@ -1,32 +1,23 @@
+// CeeSubscriber model with attributes: id, name, email
 const { DataTypes, Model } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 const { sequelize } = require("../src/utils/database");
-const ApiKey = require('./api-key');
-const CeeSubscription = require('./cee-subscription');
 const CeeSubscription = require('./cee-subscription');
 
-class CeeListing extends Model {}
+class CeeSubscriber extends Model {}
 
-CeeListing.init({
+CeeSubscriber.init({
     id: {
         type: DataTypes.UUID,
         defaultValue: () => uuidv4(),
         primaryKey: true,
     },
-    origin: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    ceeId: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    apiKeyId: {
-        type: DataTypes.UUID,
+    email: {
+        type: DataTypes.STRING,
         allowNull: false
     }
 },
@@ -34,22 +25,22 @@ CeeListing.init({
     sequelize
 });
 
-ApiKey.hasMany(CeeListing, {
-    foreignKey: 'apiKeyId',
+CeeSubscriber.hasMany(CeeSubscription, {
+    foreignKey: 'ceeSubscriberId',
     sourceKey: 'id',
     references: {
-        model: 'CeeListing',
+        model: 'CeeSubscription',
         key: 'id'
     }
 });
 
-CeeListing.belongsTo(ApiKey, {
-    foreignKey: 'apiKeyId',
+CeeSubscription.belongsTo(CeeSubscriber, {
+    foreignKey: 'ceeSubscriberId',
     targetKey: 'id',
     references: {
-        model: 'ApiKey',
+        model: 'CeeSubscriber',
         key: 'id'
     }
 });
 
-module.exports = CeeListing
+module.exports = CeeSubscriber

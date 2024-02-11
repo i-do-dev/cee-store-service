@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Keys</title>
+    <link href="static/assets/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="apikeys">API Keys</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="addplayer">Add Player</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings">Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>API Keys</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">API Key</th>
+                    <th scope="col">Client Role</th>
+                    <th scope="col">Client Email</th>
+                </tr>
+            </thead>
+            <tbody id="apiKeysTableBody">
+                <!-- API Key data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src='static/assets/jquery-3.7.1.min.js'></script>
+    <script src="static/assets/popper.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="static/assets/bootstrap-5.3.2-dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Fetch API key data and populate the table
+            // This is just a placeholder and needs to be replaced with actual AJAX call
+            var apiKeysData = [
+                { key: 'key1', role: 'role1', email: 'email1@example.com' },
+                { key: 'key2', role: 'role2', email: 'email2@example.com' },
+                // More data...
+            ];
+
+            // make jQuery ajax call to fetch API key data from GET - /api/v1/keys endpoint
+            $.ajax({
+                url: '/api/v1/keys',
+                method: 'GET',
+                contentType: 'application/json',
+                success: function (data) {
+                    apiKeysData = data.result;
+                    populateTable(apiKeysData);
+                },
+                error: function (error) {
+                    console.error('Error fetching API keys', error);
+                }
+            });
+        });
+
+        function populateTable(apiKeysData) {
+            var tableBody = $('#apiKeysTableBody');
+            tableBody.empty();
+            apiKeysData.forEach(function (apiKey) {
+                var row = $('<tr>');
+                row.append($('<td>').text(apiKey.key));
+                row.append($('<td>').text(apiKey.clientRole));
+                row.append($('<td>').text(apiKey.clientEmail));
+                tableBody.append(row);
+            });
+        }
+
+        $(document).ready(function () {
+            // iterate through li.nav-item elements and append the token to the href attribute. token value is retrieved from url query parameter
+            $('li.nav-item').each(function () {
+                var href = $(this).find('a').attr('href');
+                var token = new URLSearchParams(window.location.search).get('token');
+                $(this).find('a').attr('href', href + '?token=' + token);
+            });
+
+            $('.navbar-brand').each(function () {
+                var href = $(this).attr('href');
+                var token = new URLSearchParams(window.location.search).get('token');
+                $(this).attr('href', href + '?token=' + token);
+            });
+        });
+    </script>
+</body>
+
+</html>

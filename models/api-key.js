@@ -17,7 +17,7 @@ const ApiKey = sequelize.define('ApiKey', {
         primaryKey: true,
     },
     key: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         defaultValue: () => generateKey(),
         allowNull: false,
         unique: true,

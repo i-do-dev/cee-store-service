@@ -10,7 +10,7 @@
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
     "start": "env DEBUG=provider:* node ./src/index.js",
-    "start:nodemon": "env DEBUG=provider:* ./node_modules/nodemon/bin/nodemon.js index.js"
+    "start:nodemon": "env DEBUG=provider:* ./node_modules/nodemon/bin/nodemon.js ./src/index.js"
   },
   "author": "curriki",
   "license": "MIT",

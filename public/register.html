@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link href="static/assets/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Register</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                                    placeholder="Enter email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password"
+                                    placeholder="Enter password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <p class="text-muted mb-0">Already have an account? <a href="login">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src='static/assets/jquery-3.7.1.min.js'></script>
+    <script src="static/assets/popper.min.js" crossorigin="anonymous"></script>
+    <script src="static/assets/bootstrap-5.3.2-dist/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('form').submit(function (event) {
+                event.preventDefault();
+                var name = $('#name').val();
+                var email = $('#email').val();
+                var password = $('#password').val();
+                $.ajax({
+                    url: '/api/v1/admin/register',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        name: name,
+                        email: email,
+                        password: password
+                    }),
+                    success: function (response) {
+                        window.location.href = 'login';
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Error: ' + xhr.responseJSON.message);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

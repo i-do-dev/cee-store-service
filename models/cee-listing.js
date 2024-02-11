@@ -52,4 +52,22 @@ CeeListing.belongsTo(ApiKey, {
     }
 });
 
+CeeListing.hasMany(CeeSubscription, {
+    foreignKey: 'ceeListingId',
+    sourceKey: 'id',
+    references: {
+        model: 'CeeSubscription',
+        key: 'id'
+    }
+});
+
+CeeSubscription.belongsTo(CeeListing, {
+    foreignKey: 'ceeListingId',
+    targetKey: 'id',
+    references: {
+        model: 'CeeListing',
+        key: 'id'
+    }
+});
+
 module.exports = CeeListing

@@ -1,4 +1,5 @@
 'use strict';
+
 const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
@@ -8,14 +9,11 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: () => uuidv4()
+        defaultValue: () => uuidv4(),
       },
       ceeListingId: {
         type: Sequelize.UUID,
-        reference: {
-          model: 'CeeListings',
-          key: 'id',
-        },
+        allowNull: false,
       },
       type: {
         type: Sequelize.STRING,
@@ -62,7 +60,19 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+      }
+    });
+
+    await queryInterface.addConstraint('CeeSubscriptions', {
+      fields: ['ceeListingId'],
+      type: 'foreign key',
+      name: 'ceeListingId_fkey',
+      references: {
+        table: 'CeeListings',
+        field: 'id',
       },
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
   },
 

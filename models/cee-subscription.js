@@ -64,11 +64,19 @@ CeeSubscription.init({
 
 
 CeeListing.hasMany(CeeSubscription, {
-    foreignKey: 'ceeListingId'
+    foreignKey: 'ceeListingId',
+    references: {
+        model: 'CeeSubscription',
+        key: 'id'
+    }
 });
 
 CeeSubscription.belongsTo(CeeListing, {
-    foreignKey: 'ceeListingId'
+    foreignKey: 'ceeListingId',
+    references: {
+        model: 'CeeListing',
+        key: 'id'
+    }
 });
 
 module.exports = CeeSubscription

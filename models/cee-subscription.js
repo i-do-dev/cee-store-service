@@ -2,6 +2,7 @@
 const { DataTypes } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 const { sequelize } = require("../src/utils/database");
+const {generateKey} = require('../src/utils/key')
 
 const CeeSubscription = sequelize.define('CeeSubscription', {
     id: {
@@ -52,6 +53,12 @@ const CeeSubscription = sequelize.define('CeeSubscription', {
     ceeSubscriberId: {
         type: DataTypes.UUID,
         allowNull: false
+    },
+    licenseKey: {
+        type: DataTypes.STRING,
+        defaultValue: () => generateKey(),
+        allowNull: false,
+        unique: true,
     }
 });
 

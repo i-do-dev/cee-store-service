@@ -2,7 +2,6 @@ const { v4: uuidv4 } = require('uuid');
 const { randomBytes } = require('crypto');
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../src/utils/database");
-//const Client = require('./client');
 
 function generateKey(size = 32, format = 'base64') {
     const buffer = randomBytes(size);

@@ -3,6 +3,9 @@ const CeeListing = require('./cee-listing');
 const CeeSubscription = require('./cee-subscription');
 const ApiKey = require('./api-key');
 const CeeSubscriber = require('./cee-subscriber');
+const LicenseTerms = require('./license-terms');
+const CeeListingCollection = require('./cee-listing-collection');
+const Collection = require('./collection/collection')
 
 CeeListing.belongsTo(ApiKey, {
     foreignKey: 'apiKeyId',
@@ -59,8 +62,48 @@ CeeSubscription.belongsTo(CeeSubscriber, {
     }
 });
 
+CeeListing.hasMany(CeeListingCollection, {
+    foreignKey: 'ceeListingId',
+    targetKey: 'id',
+    references: {
+        model: 'CeeListingCollection',
+        key: 'id'
+    }
+});
+
+CeeListingCollection.belongsTo(CeeListing, {
+    foreignKey: 'ceeListingId',
+    targetKey: 'id',
+    references: {
+        model: 'CeeListing',
+        key: 'id'
+    }
+});
+
+Collection.hasMany(CeeListingCollection, {
+    foreignKey: 'collectionId',
+    targetKey: 'id',
+    references: {
+        model: 'CeeListingCollection',
+        key: 'id'
+    }
+});
+
+CeeListingCollection.belongsTo(Collection, {
+    foreignKey: 'collectionId',
+    targetKey: 'id',
+    references: {
+        model: 'Collection',
+        key: 'id'
+    }
+});
+
 module.exports = {
     CeeListing,
     CeeSubscription,
-    ApiKey
+    ApiKey,
+    LicenseTerms,
+    CeeSubscriber,
+    CeeListingCollection,
+    Collection
 };

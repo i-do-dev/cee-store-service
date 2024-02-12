@@ -14,6 +14,10 @@ module.exports = {
       ceeListingId: {
         type: Sequelize.UUID,
         allowNull: false,
+        references: {
+          model: 'CeeListings',
+          key: 'id',
+        }
       },
       type: {
         type: Sequelize.STRING,
@@ -63,17 +67,6 @@ module.exports = {
       }
     });
 
-    await queryInterface.addConstraint('CeeSubscriptions', {
-      fields: ['ceeListingId'],
-      type: 'foreign key',
-      name: 'ceeListingId_fkey',
-      references: {
-        table: 'CeeListings',
-        field: 'id',
-      },
-      onDelete: 'cascade',
-      onUpdate: 'cascade',
-    });
   },
 
   down: async (queryInterface, Sequelize) => {

@@ -1,5 +1,5 @@
 const { responseHandler } = require("../utils/response");
-const ApiKey = require("../../models/api-key");
+const {ApiKey} = require("../../models");
 const Client = require("../../models/client");
 const ClientRole = require("../../models/client-role");
 

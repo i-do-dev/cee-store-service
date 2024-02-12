@@ -1,13 +1,9 @@
 // License terms model with attributes id, title, type, terms, amount, currency, copyrightNotice, license
-const { DataTypes, Model } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 const { sequelize } = require("../src/utils/database");
-const CeeListing = require('./cee-listing');
-const CeeSubscriber = require('./cee-subscriber');
 
-class CeeSubscription extends Model {}
-
-CeeSubscription.init({
+const CeeSubscription = sequelize.define('CeeSubscription', {
     id: {
         type: DataTypes.UUID,
         defaultValue: () => uuidv4(),
@@ -56,26 +52,6 @@ CeeSubscription.init({
     ceeSubscriberId: {
         type: DataTypes.UUID,
         allowNull: false
-    }
-},
-{
-    sequelize
-});
-
-
-CeeListing.hasMany(CeeSubscription, {
-    foreignKey: 'ceeListingId',
-    references: {
-        model: 'CeeSubscription',
-        key: 'id'
-    }
-});
-
-CeeSubscription.belongsTo(CeeListing, {
-    foreignKey: 'ceeListingId',
-    references: {
-        model: 'CeeListing',
-        key: 'id'
     }
 });
 

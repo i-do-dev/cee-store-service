@@ -488,6 +488,84 @@
             }
         }
       }
+    },
+    "/api/v1/c2e-listings": {
+      "post": {
+        "x-swagger-router-controller": "c2e-listing",
+        "operationId": "Create C2E Listing",
+        "tags": ["C2E Listing Routes"],
+        "summary": "Create C2E Listing",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key (role: cee-publisher-service)",
+            "type": "string",
+            "default": "API Key (role: cee-publisher-service",
+            "required": true
+          },
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User credentials",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ceeId": {
+                  "type": "string",
+                  "example": "5f5e2e3e-3e3e-4e4e-5e5e-6e6e7e7e7e7e"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "C2E Listing Name"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "string",
+                  "example": "C2E Listing created successfully!"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Failed to create C2E Listing!"
+                },
+                "result": {
+                  "type": null,
+                  "example": null
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -3,7 +3,7 @@ const Client = require('../../../models/client');
 const ClientRole = require('../../../models/client-role');
 
 const keyAuthenticateMiddleware = async (req, res, next) => {
-  const key = req.header('X-API-KEY');
+  const key = req.header('x-api-key');
   if (!key) return res.status(401).json({ error: 'Invalid authorization' });
 
   const keyRecord = await ApiKey.findOne({

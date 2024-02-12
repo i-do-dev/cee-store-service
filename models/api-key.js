@@ -2,7 +2,6 @@ const { v4: uuidv4 } = require('uuid');
 const { randomBytes } = require('crypto');
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../src/utils/database");
-//const Client = require('./client');
 
 function generateKey(size = 32, format = 'base64') {
     const buffer = randomBytes(size);
@@ -17,7 +16,7 @@ const ApiKey = sequelize.define('ApiKey', {
         primaryKey: true,
     },
     key: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         defaultValue: () => generateKey(),
         allowNull: false,
         unique: true,

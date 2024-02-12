@@ -497,7 +497,7 @@
         "summary": "Create C2E Listing",
         "parameters": [
           {
-            "name": "X-API-KEY",
+            "name": "x-api-key",
             "in": "header",
             "description": "API Key (role: cee-publisher-service)",
             "type": "string",

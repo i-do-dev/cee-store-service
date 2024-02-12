@@ -32,7 +32,7 @@ module.exports = {
       await queryInterface.bulkInsert('LicenseTerms', [
         {
           id: uuidv4(),
-          title: 'montly License',
+          title: 'Montly License',
           type: 'licensed',
           licenseType: 'monthly',
           licenseTerms: 'Monthly - 1000 views',

@@ -14,7 +14,7 @@ module.exports = {
       return queryInterface.bulkInsert('Collections', [{
         id: uuidv4(),
         name: 'Default',
-        keywords: null,
+        parentCollectionId: null,
         createdAt: new Date(),
         updatedAt: new Date()
       }], {});

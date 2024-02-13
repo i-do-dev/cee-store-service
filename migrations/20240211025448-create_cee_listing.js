@@ -22,11 +22,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      apiKeyId: {
+      metaData: {
+        type: Sequelize.JSONB,
+        allowNull: true
+      },
+      publisherClientId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: 'ApiKeys',
+          model: 'Clients',
           key: 'id'
         }
       },

@@ -14,8 +14,8 @@ const Collection = sequelize.define('Collection', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    keywords: {
-        type: DataTypes.JSONB,
+    parentCollectionId: {
+        type: DataTypes.UUID,
         allowNull: true,
     }
 });

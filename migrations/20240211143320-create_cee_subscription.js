@@ -55,6 +55,14 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: true,
       },
+      playerClientId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'Clients',
+          key: 'id',
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

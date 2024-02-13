@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../src/utils/database");
 
-const CeeListingCollection = sequelize.define('CeeListingCollection',{
+const CeeListingCollection = sequelize.define('CeeListingCollection', {
     id: {
         type: DataTypes.UUID,
         defaultValue: () => uuidv4(),

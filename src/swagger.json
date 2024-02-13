@@ -518,6 +518,27 @@
                 "name": {
                   "type": "string",
                   "example": "C2E Listing Name"
+                },
+                "subject": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Mathematics"
+                  }
+                },
+                "educationLevel": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Grade 1"
+                  }
+                },
+                "keywords": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Mathematics, Grade 1, Addition, Subtraction"
+                  }
                 }
               }
             }

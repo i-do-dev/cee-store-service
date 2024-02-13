@@ -27,9 +27,9 @@ pagesRouter.get('/apikeys', (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/apikeys.html'));
 });
 
-pagesRouter.get('/addplayer', (req, res) => {
-    // render the addplayer page from assets folder
-    res.sendFile(path.join(__dirname, '../../public/addplayer.html'));
+pagesRouter.get('/addpublisher', (req, res) => {
+    // render the addpublisher page from assets folder
+    res.sendFile(path.join(__dirname, '../../public/addpublisher.html'));
 });
 
 pagesRouter.get('/settings', (req, res) => {

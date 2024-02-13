@@ -1,7 +1,9 @@
 'use strict';
+const { v4: uuidv4 } = require('uuid');
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Publishers', {
+    await queryInterface.createTable('PublisherServices', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -12,12 +14,16 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      url: {
+      host: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       key: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      clientId: {
+        type: Sequelize.UUID,
         allowNull: false,
       },
       createdAt: {
@@ -33,6 +39,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Publishers');
+    await queryInterface.dropTable('PublisherServices');
   }
 };

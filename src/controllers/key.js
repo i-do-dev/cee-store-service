@@ -21,6 +21,7 @@ class KeyController {
               key: key.key,
               clientRole: key.Client.ClientRole.name,
               clientEmail: key.Client.email,
+              clientId: key.Client.id
             };
           });
 

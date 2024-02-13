@@ -7,6 +7,7 @@ const CeeListingCollection = require('./cee-listing-collection');
 const Collection = require('./collection/collection');
 const Client = require('./client');
 const ClientRole = require('./client-role');
+const PublisherService = require('./publisher-service');
 
 CeeListing.hasMany(CeeSubscription, {
     foreignKey: 'ceeListingId',
@@ -119,5 +120,6 @@ module.exports = {
     CeeListingCollection,
     Collection,
     Client,
-    ClientRole
+    ClientRole,
+    PublisherService
 };

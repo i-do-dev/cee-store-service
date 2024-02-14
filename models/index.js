@@ -63,8 +63,8 @@ CeeListingCollection.belongsTo(Collection, {
     }
 });
 
-Client.hasMany(CeeListing, {
-    foreignKey: 'publisherClientId',
+PublisherService.hasMany(CeeListing, {
+    foreignKey: 'publisherServiceId',
     targetKey: 'id',
     references: {
         model: 'CeeListing',
@@ -72,17 +72,17 @@ Client.hasMany(CeeListing, {
     }
 });
 
-CeeListing.belongsTo(Client, {
-    foreignKey: 'publisherClientId',
+CeeListing.belongsTo(PublisherService, {
+    foreignKey: 'publisherServiceId',
     targetKey: 'id',
     references: {
-        model: 'Client',
+        model: 'PublisherService',
         key: 'id'
     }
 });
 
 Client.hasMany(CeeSubscription, {
-    foreignKey: 'playerClientId',
+    foreignKey: 'clientId',
     targetKey: 'id',
     references: {
         model: 'CeeSubscription',
@@ -91,7 +91,7 @@ Client.hasMany(CeeSubscription, {
 });
 
 CeeSubscription.belongsTo(Client, {
-    foreignKey: 'playerClientId',
+    foreignKey: 'clientId',
     targetKey: 'id',
     references: {
         model: 'Client',

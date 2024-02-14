@@ -8,10 +8,6 @@ const CeeListing = sequelize.define('CeeListing', {
         defaultValue: () => uuidv4(),
         primaryKey: true,
     },
-    origin: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     ceeId: {
         type: DataTypes.STRING,
         allowNull: false
@@ -24,7 +20,7 @@ const CeeListing = sequelize.define('CeeListing', {
         type: DataTypes.JSONB,
         allowNull: true
     },
-    publisherClientId: {
+    publisherServiceId: {
         type: DataTypes.UUID,
         allowNull: false
     }

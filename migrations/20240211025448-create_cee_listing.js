@@ -10,10 +10,6 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: () => uuidv4()
       },
-      origin: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       ceeId: {
         type: Sequelize.STRING,
         allowNull: false
@@ -26,11 +22,11 @@ module.exports = {
         type: Sequelize.JSONB,
         allowNull: true
       },
-      publisherClientId: {
+      publisherServiceId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: 'Clients',
+          model: 'PublisherServices',
           key: 'id'
         }
       },

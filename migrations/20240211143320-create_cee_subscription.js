@@ -55,7 +55,7 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: true,
       },
-      playerClientId: {
+      clientId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {

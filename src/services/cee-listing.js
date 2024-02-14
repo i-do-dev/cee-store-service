@@ -5,14 +5,12 @@ const {CeeSubscription} = require('../../models');
 const {ClientRole} = require('../../models');
 const {Collection} = require('../../models');
 const {CeeListingCollection} = require('../../models');
+const {PublisherService} = require('../../models');
 
 class CeeListingService {
   static async create(req) {
 
     try {  
-      //get api call origin from request headers
-      const origin = req.headers.host;
-      const publisherClientId = req.Client.id;
       const ceeId = req.body.ceeId;
       const name = req.body.name;
       const subject = req.body.subject;
@@ -20,8 +18,17 @@ class CeeListingService {
       const keywords = req.body.keywords;
       const metaData = {subject, educationLevel, keywords};
 
+      
+      const publisherClientId = req.body.publisherClientId;
+      // get PublisherService by clientId with value of publisherClientId
+      const publisherService = await PublisherService.findOne({where: {clientId: publisherClientId}});
+      if (!publisherService) {
+        throw new Error('Publisher service not added to the store');
+      }
+
       // create a new listing
-      const ceeListing = await CeeListing.create({origin, ceeId, name, metaData, publisherClientId});
+      const ceeListing = await CeeListing.create({ceeId, name, metaData, publisherServiceId: publisherService.id});
+
 
       // add cce listing to Subject's Collection otherwise Default Collection
       const defaultCollection = await Collection.findOrCreate({ where: {name: 'Default'}, defaults: {name: 'Default'}});
@@ -64,7 +71,7 @@ class CeeListingService {
           currency: previewLicenseTerms.currency,
           copyrightNotice: previewLicenseTerms.copyrightNotice,
           license: previewLicenseTerms.license,
-          playerClientId: playerClient.id
+          clientId: playerClient.id
         });
 
         const licensedCeeSubscription = await CeeSubscription.create({
@@ -76,11 +83,24 @@ class CeeListingService {
           currency: licensedLicenseTerms.currency,
           copyrightNotice: licensedLicenseTerms.copyrightNotice,
           license: licensedLicenseTerms.license,
-          playerClientId: playerClient.id
+          clientId: playerClient.id
         });
-
-        // make cee manifests on publisher service
         
+        // get PublisherService by clientId with value of publisherClientId
+        const publisherService = await PublisherService.findOne({where: {clientId: publisherClientId}});
+        // make axios request to publisherService.host with previewCeeSubscription and licensedCeeSubscription as payload and publisherService.key as header
+        const axios = require('axios');
+        const apikey = publisherService.key
+        const postUrl = publisherService.host + '/api/v1/c2e/manifest';
+        const postData = {
+          ceeId,
+          previewCeeSubscription,
+          licensedCeeSubscription
+        }
+
+        console.log('apikey ++++++++++++ ', apikey);
+        console.log('postUrl ++++++++++++ ', postUrl);
+        console.log('postData ++++++++++++ ', postData);
 
       } else {
         throw new Error('Both license terms not found');

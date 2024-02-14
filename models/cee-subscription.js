@@ -50,7 +50,7 @@ const CeeSubscription = sequelize.define('CeeSubscription', {
         type: DataTypes.DATE,
         allowNull: true
     },
-    playerClientId: {
+    clientId: {
         type: DataTypes.UUID,
         allowNull: false
     }

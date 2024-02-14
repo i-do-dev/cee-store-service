@@ -94,13 +94,21 @@ class CeeListingService {
         const postUrl = publisherService.host + '/api/v1/c2e/manifest';
         const postData = {
           ceeId,
-          previewCeeSubscription,
-          licensedCeeSubscription
+          previewCeeSubscription: {...previewCeeSubscription.dataValues},
+          licensedCeeSubscription: {...licensedCeeSubscription.dataValues}
         }
 
-        console.log('apikey ++++++++++++ ', apikey);
-        console.log('postUrl ++++++++++++ ', postUrl);
-        console.log('postData ++++++++++++ ', postData);
+        const response = await axios.post(postUrl, postData, {
+          headers: {
+            'x-api-key': apikey
+          }
+        });
+
+        if (response.status === 200) {
+          return ceeListing;
+        } else {
+          throw new Error('Error creating cee listing');
+        }
 
       } else {
         throw new Error('Both license terms not found');

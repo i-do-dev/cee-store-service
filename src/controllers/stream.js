@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { responseHandler } = require("../utils/response");
-const Publisher = require('../../models/publisher');
+const PublisherService = require('../../models/publisher-service');
 class StreamController {
   static async getToken(req, res, next) {
     // find c2eid
@@ -8,15 +8,15 @@ class StreamController {
                                    // Should verify ownership using API key used to make request
     // check payment method
       // Assuming payment method is good until implementation
-    // get publisher and call for token
-      // Each c2e related to a publisher. Getting first one for testing until listing implementation
-    const publisher = await Publisher.findOne();
+    // get publisherService and call for token
+      // Each c2e related to a publisherService. Getting first one for testing until listing implementation
+    const publisherService = await PublisherService.findOne();
     try {
       const options = {
         method: 'GET', // Adjust the HTTP method as needed (GET, POST, etc.)
-        url: `${publisher.url}/api/v1/stream/token?c2eid=${c2eId}`,
+        url: `${publisherService.host}/api/v1/stream/token?c2eid=${c2eId}`,
         headers: {
-          'X-API-KEY': publisher.key,
+          'X-API-KEY': publisherService.key,
           'Content-Type': 'application/json',
         },
       };

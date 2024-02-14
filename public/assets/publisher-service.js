@@ -1,50 +1,53 @@
 $(document).ready(function() {
-    document.getElementById('player-service-form').addEventListener('submit', function(event) {
+    document.getElementById('publisher-service-form').addEventListener('submit', function(event) {
         event.preventDefault();
     
         var name = document.getElementById('name').value;
         var host = document.getElementById('host').value;
         var key = document.getElementById('key').value;
+        var clientId = document.getElementById('clientId').value;
     
-        var playerService = {
+        var publisherService = {
             name: name,
-            key: key
+            host: host,
+            key: key,
+            clientId: clientId
         };
     
-        // jquery ajax post request to POST - /api/v1/player to post json data
+        // jquery ajax post request to POST - /api/v1/publisher to post json data
         $.ajax({
-            url: '/api/v1/player-services',
+            url: '/api/v1/publisher-services',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(playerService),
+            data: JSON.stringify(publisherService),
             success: function(response) {
-                alert('player Service created successfully');
-                //window.location.href = '/player';
-                // reload the page to display the new player service
+                alert('publisher Service created successfully');
+                //window.location.href = '/publisher';
+                // reload the page to display the new publisher service
                 location.reload();
             },
             error: function(error) {
-                alert('Error creating player Service');
+                alert('Error creating publisher Service');
             }
         });
     
     });
     
     /*
-    fetch('/api/v1/player-services')
+    fetch('/api/v1/publisher-services')
     .then(response => response.json())
-    .then(playerServices => {
-        var tableBody = document.querySelector('#player-service-table tbody');
+    .then(publisherServices => {
+        var tableBody = document.querySelector('#publisher-service-table tbody');
     
-        playerServices.forEach(playerService => {
+        publisherServices.forEach(publisherService => {
             var row = document.createElement('tr');
     
             var nameCell = document.createElement('td');
-            nameCell.textContent = playerService.name;
+            nameCell.textContent = publisherService.name;
             row.appendChild(nameCell);
     
             var keyCell = document.createElement('td');
-            keyCell.textContent = playerService.key;
+            keyCell.textContent = publisherService.key;
             row.appendChild(keyCell);
     
             tableBody.appendChild(row);
@@ -52,32 +55,36 @@ $(document).ready(function() {
     });
     */
 
-    // jquery ajax request to GET - /api/v1/player to retrieve json data and populate the table
+    // jquery ajax request to GET - /api/v1/publisher to retrieve json data and populate the table
     $.ajax({
-        url: '/api/v1/player-services',
+        url: '/api/v1/publisher-services',
         type: 'GET',
         success: function(response) {
-            var tableBody = document.querySelector('#player-service-table tbody');
-            response.result.forEach(playerService => {
+            var tableBody = document.querySelector('#publisher-service-table tbody');
+            response.result.forEach(publisherService => {
                 var row = document.createElement('tr');
     
                 var nameCell = document.createElement('td');
-                nameCell.textContent = playerService.name;
+                nameCell.textContent = publisherService.name;
                 row.appendChild(nameCell);
 
                 var hostCell = document.createElement('td');
-                hostCell.textContent = playerService.host;
+                hostCell.textContent = publisherService.host;
                 row.appendChild(hostCell);
     
                 var keyCell = document.createElement('td');
-                keyCell.textContent = playerService.key;
+                keyCell.textContent = publisherService.key;
                 row.appendChild(keyCell);
+
+                var clientIdCell = document.createElement('td');
+                clientIdCell.textContent = publisherService.clientId;
+                row.appendChild(clientIdCell);
     
                 tableBody.appendChild(row);
             });
         },
         error: function(error) {
-            alert('Error retrieving player Services');
+            alert('Error retrieving publisher Services');
         }
     });
 });

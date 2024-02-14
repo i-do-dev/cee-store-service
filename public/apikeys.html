@@ -21,7 +21,7 @@
                         <a class="nav-link active" aria-current="page" href="apikeys">API Keys</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="addplayer">Add Player</a>
+                        <a class="nav-link" href="addpublisher">Manage Publishers</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="settings">Settings</a>
@@ -39,6 +39,7 @@
                     <th scope="col">API Key</th>
                     <th scope="col">Client Role</th>
                     <th scope="col">Client Email</th>
+                    <th scope="col">Client ID</th>
                 </tr>
             </thead>
             <tbody id="apiKeysTableBody">
@@ -84,6 +85,7 @@
                 row.append($('<td>').text(apiKey.key));
                 row.append($('<td>').text(apiKey.clientRole));
                 row.append($('<td>').text(apiKey.clientEmail));
+                row.append($('<td>').text(apiKey.clientId));
                 tableBody.append(row);
             });
         }

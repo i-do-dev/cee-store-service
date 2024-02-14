@@ -1,4 +1,7 @@
 'use strict';
+
+const { ref } = require("joi");
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Collections', {
@@ -12,9 +15,13 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      keywords: {
-        type: Sequelize.JSONB,
-        allowNull: true
+      parentCollectionId: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: 'Collections',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

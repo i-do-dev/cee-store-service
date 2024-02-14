@@ -518,6 +518,27 @@
                 "name": {
                   "type": "string",
                   "example": "C2E Listing Name"
+                },
+                "subject": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Mathematics"
+                  }
+                },
+                "educationLevel": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Grade 1"
+                  }
+                },
+                "keywords": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Mathematics, Grade 1, Addition, Subtraction"
+                  }
                 }
               }
             }
@@ -556,6 +577,66 @@
                 "message": {
                   "type": "string",
                   "example": "Failed to create C2E Listing!"
+                },
+                "result": {
+                  "type": null,
+                  "example": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/c2e-subscriptions/manifest": {
+      "get": {
+        "x-swagger-router-controller": "c2e-subscription",
+        "operationId": "Get C2E Player Subscriptions Manifest",
+        "tags": ["C2E Subscription Routes"],
+        "summary": "Get C2E Player Subscriptions Manifest",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key (role: cee-player-service)",
+            "type": "string",
+            "default": "API Key (role: cee-player-service",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "string",
+                  "example": "C2E Player Subscriptions Manifest"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Failed to show C2E Subscriptions!"
                 },
                 "result": {
                   "type": null,

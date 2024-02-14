@@ -2,28 +2,12 @@
 const CeeListing = require('./cee-listing');
 const CeeSubscription = require('./cee-subscription');
 const ApiKey = require('./api-key');
-const CeeSubscriber = require('./cee-subscriber');
 const LicenseTerms = require('./license-terms');
 const CeeListingCollection = require('./cee-listing-collection');
-const Collection = require('./collection/collection')
-
-CeeListing.belongsTo(ApiKey, {
-    foreignKey: 'apiKeyId',
-    targetKey: 'id',
-    references: {
-        model: 'ApiKey',
-        key: 'id'
-    }
-});
-
-ApiKey.hasMany(CeeListing, {
-    foreignKey: 'apiKeyId',
-    sourceKey: 'id',
-    references: {
-        model: 'CeeListing',
-        key: 'id'
-    }
-});
+const Collection = require('./collection/collection');
+const Client = require('./client');
+const ClientRole = require('./client-role');
+const PublisherService = require('./publisher-service');
 
 CeeListing.hasMany(CeeSubscription, {
     foreignKey: 'ceeListingId',
@@ -39,25 +23,6 @@ CeeSubscription.belongsTo(CeeListing, {
     targetKey: 'id',
     references: {
         model: 'CeeListing',
-        key: 'id'
-    }
-});
-
-
-CeeSubscriber.hasMany(CeeSubscription, {
-    foreignKey: 'ceeSubscriberId',
-    sourceKey: 'id',
-    references: {
-        model: 'CeeSubscription',
-        key: 'id'
-    }
-});
-
-CeeSubscription.belongsTo(CeeSubscriber, {
-    foreignKey: 'ceeSubscriberId',
-    targetKey: 'id',
-    references: {
-        model: 'CeeSubscriber',
         key: 'id'
     }
 });
@@ -98,12 +63,63 @@ CeeListingCollection.belongsTo(Collection, {
     }
 });
 
+PublisherService.hasMany(CeeListing, {
+    foreignKey: 'publisherServiceId',
+    targetKey: 'id',
+    references: {
+        model: 'CeeListing',
+        key: 'id'
+    }
+});
+
+CeeListing.belongsTo(PublisherService, {
+    foreignKey: 'publisherServiceId',
+    targetKey: 'id',
+    references: {
+        model: 'PublisherService',
+        key: 'id'
+    }
+});
+
+Client.hasMany(CeeSubscription, {
+    foreignKey: 'clientId',
+    targetKey: 'id',
+    references: {
+        model: 'CeeSubscription',
+        key: 'id'
+    }
+});
+
+CeeSubscription.belongsTo(Client, {
+    foreignKey: 'clientId',
+    targetKey: 'id',
+    references: {
+        model: 'Client',
+        key: 'id'
+    }
+});
+
+// Collection relatonships with Collection via parentCollectionId
+Collection.hasMany(Collection, {
+    foreignKey: 'parentCollectionId',
+    targetKey: 'id',
+    as: 'childCollections'
+});
+
+Collection.belongsTo(Collection, {
+    foreignKey: 'parentCollectionId',
+    targetKey: 'id',
+    as: 'parentCollection'
+});
+
 module.exports = {
     CeeListing,
     CeeSubscription,
     ApiKey,
     LicenseTerms,
-    CeeSubscriber,
     CeeListingCollection,
-    Collection
+    Collection,
+    Client,
+    ClientRole,
+    PublisherService
 };

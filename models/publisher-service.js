@@ -2,7 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../src/utils/database");
 
-const Publisher = sequelize.define('Publisher', {
+const PublisherService = sequelize.define('PublisherService', {
     id: {
         type: DataTypes.UUID,
         defaultValue: () => uuidv4(),
@@ -13,7 +13,7 @@ const Publisher = sequelize.define('Publisher', {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
-    url: {
+    host: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -22,6 +22,10 @@ const Publisher = sequelize.define('Publisher', {
         allowNull: false,
         unique: true,
     },
+    clientId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+    }
 });
 
-module.exports = Publisher;
+module.exports = PublisherService;

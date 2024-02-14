@@ -50,15 +50,9 @@ const CeeSubscription = sequelize.define('CeeSubscription', {
         type: DataTypes.DATE,
         allowNull: true
     },
-    ceeSubscriberId: {
+    clientId: {
         type: DataTypes.UUID,
         allowNull: false
-    },
-    licenseKey: {
-        type: DataTypes.STRING,
-        defaultValue: () => generateKey(),
-        allowNull: false,
-        unique: true,
     }
 });
 

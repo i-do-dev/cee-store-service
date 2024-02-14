@@ -9,6 +9,17 @@ function generateKey(size = 32, format = 'base64') {
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+
+    // skip seeding if there are already select queries for ClientRoles, Clients, and ApiKeys
+    const clientRoleCount = await queryInterface.sequelize.query('SELECT COUNT(id) FROM "ClientRoles"');
+    const clientCount = await queryInterface.sequelize.query('SELECT COUNT(id) FROM "Clients"');
+    const keyCount = await queryInterface.sequelize.query('SELECT COUNT(id) FROM "ApiKeys"');
+
+    if (clientRoleCount[0][0].count > 1 || clientCount[0][0].count > 1 || keyCount[0][0].count > 1) {
+      return Promise.resolve(); // Skip the seeding
+    }
+    
+
     const publisherRoleId = uuidv4();
     const playerRoleId = uuidv4();
     const publisherClientId = uuidv4();

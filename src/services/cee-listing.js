@@ -13,10 +13,11 @@ class CeeListingService {
     try {  
       const ceeId = req.body.ceeId;
       const name = req.body.name;
+      const description = req.body.description;
       const subject = req.body.subject;
       const educationLevel = req.body.educationLevel;
       const keywords = req.body.keywords;
-      const metaData = {subject, educationLevel, keywords};
+      const metaData = {description, subject, educationLevel, keywords};
 
       
       const publisherClientId = req.body.publisherClientId;

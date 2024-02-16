@@ -1,0 +1,35 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{.Values.COMMON_NAME}}-db-migrate
+  annotations:
+    secrets.doppler.com/reload: 'true'
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+  labels:
+    app: {{.Values.COMMON_NAME}}
+spec:
+  template:
+    metadata:
+      labels:
+        name: {{.Values.COMMON_NAME}}-db-migrate
+    spec:
+      restartPolicy: Never
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: cee-store-service-config
+        name: cee-store-service-config
+      containers:
+        - name: {{.Values.COMMON_NAME}}-db-migrate
+          image: {{.Values.image.repository}}
+          imagePullPolicy: {{.Values.image.pullPolicy}}
+          command: ["npm", "run", "migrate"]
+          envFrom:
+          - configMapRef:
+              name: cee-store-service-config
+          volumeMounts:
+          - mountPath: /app/.env
+            name: cee-store-service-config
+            subPath: .env

@@ -17,7 +17,8 @@ class CeeListingService {
       const subject = req.body.subject;
       const educationLevel = req.body.educationLevel;
       const keywords = req.body.keywords;
-      const metaData = {description, subject, educationLevel, keywords};
+      const thumbnailUrl = req.body.thumbnailUrl;
+      const metaData = {description, subject, educationLevel, keywords, thumbnailUrl};
 
       
       const publisherClientId = req.body.publisherClientId;

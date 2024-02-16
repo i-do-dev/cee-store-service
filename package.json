@@ -1,19 +1,21 @@
 {
-  "name": "boilerplate",
+  "name": "c2e-store-service",
   "version": "1.0.0",
-  "description": "boilerplate",
+  "description": "c2e-store-service",
   "main": "index.js",
   "scripts": {
     "migrate": "npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all",
     "test": "jest --verbose",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
     "start": "env DEBUG=provider:* node ./src/index.js",
-    "start:nodemon": "env DEBUG=provider:* ./node_modules/nodemon/bin/nodemon.js index.js"
+    "start:nodemon": "env DEBUG=provider:* ./node_modules/nodemon/bin/nodemon.js ./src/index.js"
   },
   "author": "curriki",
   "license": "MIT",
   "dependencies": {
+    "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

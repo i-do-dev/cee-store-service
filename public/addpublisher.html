@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Publisher</title>
+    <link href="static/assets/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="apikeys">API Keys</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="addpublisher">Manage Publishers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings">Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="mt-4">Add Publisher Service</h1>
+
+        <form id="publisher-service-form" class="mb-4">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" id="name" name="name" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="host" class="form-label">Host:</label>
+                <input type="text" id="host" name="host" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="key" class="form-label">Key:</label>
+                <input type="text" id="key" name="key" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="clientId" class="form-label">Client ID</label>
+                <input type="text" id="clientId" name="clientId" class="form-control">
+            </div>
+
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
+
+        <h2>Publisher Services</h2>
+        <table id="publisher-service-table" class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Host</th>
+                    <th>Key</th>
+                    <th>Client ID</th>
+
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src='static/assets/jquery-3.7.1.min.js'></script>
+    <script src="static/assets/popper.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="static/assets/bootstrap-5.3.2-dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="static/assets/publisher-service.js"></script>
+</body>
+</html>

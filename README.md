@@ -10,7 +10,7 @@ Please execute the folowing commands cefore starting the App for the first time.
 
 > npm start
 
-# Curriki C2E Store API Documentation
+# Curriki C2E Store Service API Documentation
 
 Welcome to the Curriki C2E Store Service API documentation. :tada: :tada: :tada:
 

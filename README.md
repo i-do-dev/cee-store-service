@@ -22,6 +22,7 @@ Welcome to the Curriki C2E Store Service API documentation. :tada: :tada: :tada:
 - [C2E Subscription Routes](#c2e-subscription-routes)
   - [Get C2E Player Subscriptions Manifest](#get-c2e-player-subscriptions-manifest)
 - [API Key Routes](#api-key-routes)
+- [Database Diagram](#database-diagram)
 
 ---
 
@@ -159,5 +160,9 @@ Endpoint to retrieve API Keys.
       ```
 
 ---
+
+
+## Database Diagram
+![db](https://raw.githubusercontent.com/CurrikiEducationalExperiences/cee-store-service/main/public/c2e-store-service-diagram.png)
 
 

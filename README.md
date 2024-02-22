@@ -29,7 +29,7 @@ Welcome to the Curriki C2E Store Service API documentation. :tada: :tada: :tada:
 ## Base URL
 
 All endpoints are relative to the base URL:
-> https://c2e.curriki.org/api/v1
+> https://service-host/api/v1
 
 
 

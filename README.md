@@ -23,6 +23,7 @@ Welcome to the Curriki C2E Store Service API documentation. :tada: :tada: :tada:
   - [Get C2E Player Subscriptions Manifest](#get-c2e-player-subscriptions-manifest)
 - [API Key Routes](#api-key-routes)
 - [Database Diagram](#database-diagram)
+- [C2E SPECIFICATION DOCUMENT](https://github.com/CurrikiEducationalExperiences/cee-publisher-service/blob/main/public/C2E%20Specification%20v1.0.pdf?raw=true)
 
 ---
 

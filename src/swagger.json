@@ -6,6 +6,221 @@
   },
   "schemes": ["http", "https"],
   "paths": {
+    "/api/v1/c2e-listings": {
+      "post": {
+        "x-swagger-router-controller": "c2e-listing",
+        "operationId": "Create C2E Listing",
+        "tags": ["C2E Listing Routes"],
+        "summary": "Create C2E Listing",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key (role: cee-publisher-service)",
+            "type": "string",
+            "default": "API Key (role: cee-publisher-service",
+            "required": true
+          },
+          {
+            "name": "payload",
+            "in": "body",
+            "description": "User credentials",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ceeId": {
+                  "type": "string",
+                  "example": "5f5e2e3e-3e3e-4e4e-5e5e-6e6e7e7e7e7e"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "C2E Listing Name"
+                },
+                "subject": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Mathematics"
+                  }
+                },
+                "educationLevel": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Grade 1"
+                  }
+                },
+                "keywords": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Mathematics, Grade 1, Addition, Subtraction"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "string",
+                  "example": "C2E Listing created successfully!"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Failed to create C2E Listing!"
+                },
+                "result": {
+                  "type": null,
+                  "example": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/c2e-subscriptions/manifest": {
+      "get": {
+        "x-swagger-router-controller": "c2e-subscription",
+        "operationId": "Get C2E Player Subscriptions Manifest",
+        "tags": ["C2E Subscription Routes"],
+        "summary": "Get C2E Player Subscriptions Manifest",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "description": "API Key (role: cee-player-service)",
+            "type": "string",
+            "default": "API Key (role: cee-player-service",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "string",
+                  "example": "C2E Player Subscriptions Manifest"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Failed to show C2E Subscriptions!"
+                },
+                "result": {
+                  "type": null,
+                  "example": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/keys": {
+      "get": {
+        "x-swagger-router-controller": "users",
+        "operationId": "API Keys",
+        "tags": ["API Key Routes"],
+        "summary": "Get API Keys",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Authorization",
+            "type": "string",
+            "default": "Bearer APIKey",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response Format",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Success"
+                },
+                "result": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "example": "APIKey"
+                      },
+                      "clientRole": {
+                        "type": "string",
+                        "example": "cee-publisher-service | cee-player-service"
+                      },
+                      "clientEmail": {
+                        "type": "string",
+                        "example": "demo-c2e-store@curriki.org"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/admin/register": {
       "post": {
         "x-swagger-router-controller": "users",
@@ -486,165 +701,6 @@
                 }
               }
             }
-        }
-      }
-    },
-    "/api/v1/c2e-listings": {
-      "post": {
-        "x-swagger-router-controller": "c2e-listing",
-        "operationId": "Create C2E Listing",
-        "tags": ["C2E Listing Routes"],
-        "summary": "Create C2E Listing",
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "description": "API Key (role: cee-publisher-service)",
-            "type": "string",
-            "default": "API Key (role: cee-publisher-service",
-            "required": true
-          },
-          {
-            "name": "payload",
-            "in": "body",
-            "description": "User credentials",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "ceeId": {
-                  "type": "string",
-                  "example": "5f5e2e3e-3e3e-4e4e-5e5e-6e6e7e7e7e7e"
-                },
-                "name": {
-                  "type": "string",
-                  "example": "C2E Listing Name"
-                },
-                "subject": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": "Mathematics"
-                  }
-                },
-                "educationLevel": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": "Grade 1"
-                  }
-                },
-                "keywords": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": "Mathematics, Grade 1, Addition, Subtraction"
-                  }
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response Format",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "integer",
-                  "example": 200
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Success"
-                },
-                "result": {
-                  "type": "string",
-                  "example": "C2E Listing created successfully!"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Response Format",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "integer",
-                  "example": 400
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Failed to create C2E Listing!"
-                },
-                "result": {
-                  "type": null,
-                  "example": null
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/c2e-subscriptions/manifest": {
-      "get": {
-        "x-swagger-router-controller": "c2e-subscription",
-        "operationId": "Get C2E Player Subscriptions Manifest",
-        "tags": ["C2E Subscription Routes"],
-        "summary": "Get C2E Player Subscriptions Manifest",
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "description": "API Key (role: cee-player-service)",
-            "type": "string",
-            "default": "API Key (role: cee-player-service",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response Format",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "integer",
-                  "example": 200
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Success"
-                },
-                "result": {
-                  "type": "string",
-                  "example": "C2E Player Subscriptions Manifest"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Response Format",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "integer",
-                  "example": 400
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Failed to show C2E Subscriptions!"
-                },
-                "result": {
-                  "type": null,
-                  "example": null
-                }
-              }
-            }
-          }
         }
       }
     }

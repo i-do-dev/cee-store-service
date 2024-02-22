@@ -4,13 +4,13 @@ const ClientRole = require('../../../models/client-role');
 
 const keyAuthenticateMiddleware = async (req, res, next) => {
   const key = req.header('x-api-key');
-  if (!key) return res.status(401).json({ error: 'Invalid authorization' });
+  if (!key) return res.status(401).json({ error: 'cee-store-service: Missing API key' });
 
   const keyRecord = await ApiKey.findOne({
     where: { key: key },
     include: {
       model: Client,
-      as: 'Client', // Specify the alias for the association
+      as: 'Client',
       include: {
         model: ClientRole,
         as: 'ClientRole'
@@ -18,7 +18,7 @@ const keyAuthenticateMiddleware = async (req, res, next) => {
     },
   });
   
-  if (!keyRecord) return res.status(401).json({ error: 'Invalid API key' });
+  if (!keyRecord) return res.status(401).json({ error: 'cee-store-service: Invalid API key' });
 
   req.Client = keyRecord.Client;
   next();

@@ -21,7 +21,10 @@ Welcome to the Curriki C2E Store Service API documentation. :tada: :tada: :tada:
   - [Create C2E Listing](#create-c2e-listing)
 - [C2E Subscription Routes](#c2e-subscription-routes)
   - [Get C2E Player Subscriptions Manifest](#get-c2e-player-subscriptions-manifest)
+  - [Get C2E Stream Token](#get-c2e-stream-token)
+  - [Get C2E Manifest](#get-c2e-manifest)
 - [API Key Routes](#api-key-routes)
+- [Swagger Documentation](#swagger-documentation)
 - [Database Diagram](#database-diagram)
 - [C2E SPECIFICATION DOCUMENT](https://github.com/CurrikiEducationalExperiences/cee-publisher-service/blob/main/public/C2E%20Specification%20v1.0.pdf?raw=true)
 
@@ -128,6 +131,75 @@ Endpoint to retrieve the C2E Player Subscriptions Manifest.
 
 ---
 
+### Get C2E Stream Token
+
+Endpoint to get a C2E Stream token.
+
+- **URL:** `/stream/token`
+- **Method:** `GET`
+- **Summary:** Get C2E Stream token (called from player service)
+- **Parameters:**
+  - `x-api-key` (header) - Authentication and Authorization
+    - **Type:** string
+    - **Default:** APIKey (role: cee-player-service)
+    - **Required:** true
+  - `subid` (query) - C2E Subscription ID setup on the player service
+    - **Type:** string
+    - **Required:** true
+- **Responses:**
+  - `200`:
+    - **Description:** Success
+    - **Schema:**
+      ```json
+      {
+        "code": 200,
+        "message": "Success",
+        "result": [
+          {
+            "ceeId": "C2E ID",
+            "token": "C2E Stream Token",
+            "expiresAt": "C2E Stream Token Expiry Date"
+          }
+        ]
+      }
+  ```
+
+
+### Get C2E Manifest
+
+Endpoint to get a C2E Manifest.
+
+- **URL:** `/stream/manifest`
+- **Method:** `GET`
+- **Summary:** Get C2E Manifest (called from player service)
+- **Parameters:**
+  - `x-api-key` (header) - Authentication and Authorization
+    - **Type:** string
+    - **Default:** APIKey (role: cee-player-service)
+    - **Required:** true
+  - `subid` (query) - C2E Subscription ID
+    - **Type:** string
+    - **Required:** true
+- **Responses:**
+  - `200`:
+    - **Description:** Success
+    - **Schema:**
+      ```json
+      {
+        "code": 200,
+        "message": "Success",
+        "result": [
+          {
+            "ceeId": "C2E Subscription ID",
+            "manifest": "C2E Manifest"
+          }
+        ]
+      }
+      ```
+
+---
+
+
 ## API Key Routes
 
 ### Get API Keys
@@ -162,6 +234,8 @@ Endpoint to retrieve API Keys.
 
 ---
 
+## Swagger Documentation
+> Swagger Documentation can be found on following link https://service-host/api-docs/
 
 ## Database Diagram
 ![db](https://raw.githubusercontent.com/CurrikiEducationalExperiences/cee-store-service/main/public/c2e-store-service-diagram.png)

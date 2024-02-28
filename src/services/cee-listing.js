@@ -11,7 +11,7 @@ class CeeListingService {
   static async create(req) {
 
     try {  
-      const ceeId = req.body.ceeId;
+      const ceeMasterId = req.body.ceeMasterId;
       const name = req.body.name;
       const description = req.body.description;
       const subject = req.body.subject;
@@ -29,7 +29,7 @@ class CeeListingService {
       }
 
       // create a new listing
-      const ceeListing = await CeeListing.create({ceeId, name, metaData, publisherServiceId: publisherService.id});
+      const ceeListing = await CeeListing.create({ceeMasterId, name, metaData, publisherServiceId: publisherService.id});
 
 
       // add cce listing to Subject's Collection otherwise Default Collection
@@ -95,7 +95,7 @@ class CeeListingService {
         const apikey = publisherService.key
         const postUrl = publisherService.host + '/api/v1/c2e/manifest';
         const postData = {
-          ceeId,
+          ceeMasterId,
           previewCeeSubscription: {...previewCeeSubscription.dataValues},
           licensedCeeSubscription: {...licensedCeeSubscription.dataValues}
         }

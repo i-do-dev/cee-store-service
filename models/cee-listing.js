@@ -8,7 +8,7 @@ const CeeListing = sequelize.define('CeeListing', {
         defaultValue: () => uuidv4(),
         primaryKey: true,
     },
-    ceeId: {
+    ceeMasterId: {
         type: DataTypes.STRING,
         allowNull: false
     },

@@ -14,7 +14,10 @@ const Client = sequelize.define('Client', {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
-}, { timestamps: false});
+}, { 
+  underscored: true,
+  tableName: 'client'
+});
 
 Client.hasMany(ApiKey, {
   foreignKey: 'clientId'

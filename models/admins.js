@@ -15,5 +15,9 @@ const Admins = sequelize.define("admins", {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
+},
+{
+  underscored: true,
+  tableName: 'admin'
 });
 module.exports = { Admins };

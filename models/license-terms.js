@@ -3,9 +3,7 @@ const { DataTypes, Model } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 const { sequelize } = require("../src/utils/database");
 
-class LicenseTerms extends Model {}
-
-LicenseTerms.init({
+const LicenseTerms = sequelize.define('LicenseTerms', {
     id: {
         type: DataTypes.UUID,
         defaultValue: () => uuidv4(),
@@ -45,7 +43,8 @@ LicenseTerms.init({
     }
 },
 {
-    sequelize
+    underscored: true,
+    tableName: 'license_terms'
 });
 
 module.exports = LicenseTerms

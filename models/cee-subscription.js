@@ -54,6 +54,10 @@ const CeeSubscription = sequelize.define('CeeSubscription', {
         type: DataTypes.UUID,
         allowNull: false
     }
+},
+{
+    underscored: true,
+    tableName: 'cee_subscription'
 });
 
 module.exports = CeeSubscription

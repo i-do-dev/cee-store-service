@@ -17,6 +17,10 @@ const ClientRole = sequelize.define('ClientRole', {
     description: {
         type: DataTypes.STRING,
     },
+},
+{
+    underscored: true,
+    tableName: 'client_role'
 });
 
 module.exports = ClientRole;

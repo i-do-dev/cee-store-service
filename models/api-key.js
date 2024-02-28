@@ -25,6 +25,10 @@ const ApiKey = sequelize.define('ApiKey', {
         type: DataTypes.UUID,
         allowNull: false
     },
+},
+{
+    underscored: true,
+    tableName: 'api_key'
 });
 
 module.exports = ApiKey;

@@ -15,5 +15,9 @@ const ResetPasswordTokens = sequelize.define("resetPasswordTokens", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+},
+{
+  underscored: true,
+  tableName: 'reset_password_token'
 });
 module.exports = { ResetPasswordTokens };

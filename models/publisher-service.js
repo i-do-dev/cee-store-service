@@ -26,6 +26,10 @@ const PublisherService = sequelize.define('PublisherService', {
         type: DataTypes.UUID,
         allowNull: false,
     }
+},
+{
+    underscored: true,
+    tableName: 'publisher_service'
 });
 
 module.exports = PublisherService;

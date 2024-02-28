@@ -17,6 +17,10 @@ const CeeListingCollection = sequelize.define('CeeListingCollection', {
         type: DataTypes.UUID,
         allowNull: false,
     }
+},
+{
+    underscored: true,
+    tableName: 'cee_listing_collection'
 });
 
 module.exports = CeeListingCollection;

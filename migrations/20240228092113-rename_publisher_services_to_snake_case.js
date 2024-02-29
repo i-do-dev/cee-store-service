@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     // Rename table
-    await queryInterface.renameTable('PublisherServices', 'publisher_services');
+    await queryInterface.renameTable('PublisherServices', 'publisher_service');
 
     // Rename columns
     await queryInterface.renameColumn('publisher_service', 'clientId', 'client_id');

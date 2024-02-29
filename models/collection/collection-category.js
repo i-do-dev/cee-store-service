@@ -18,6 +18,10 @@ const Category = sequelize.define('Category',{
         type: DataTypes.UUID,
         allowNull: false,
     }
+},
+{
+    underscored: true,
+    tableName: 'collection_category'
 });
 
 module.exports = Category;

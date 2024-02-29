@@ -18,6 +18,10 @@ const Collection = sequelize.define('Collection', {
         type: DataTypes.UUID,
         allowNull: true,
     }
+},
+{
+    underscored: true,
+    tableName: 'collection'
 });
 
 module.exports = Collection;

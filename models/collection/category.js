@@ -17,6 +17,10 @@ const Category = sequelize.define('Category',{
         type: DataTypes.JSONB,
         allowNull: true,
     }
+}, 
+{
+    underscored: true,
+    tableName: 'category'
 });
 
 module.exports = Category;

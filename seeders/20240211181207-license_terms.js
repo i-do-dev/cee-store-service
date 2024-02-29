@@ -5,49 +5,49 @@ const { v4: uuidv4 } = require('uuid');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const existingTypes = await queryInterface.sequelize.query(
-      `SELECT type FROM "LicenseTerms" GROUP BY type;`
+      `SELECT type FROM "license_terms" GROUP BY type;`
     );
 
     const existingTypesArray = existingTypes[0].map(record => record.type);
 
     if (!existingTypesArray.includes('preview')) {
-      await queryInterface.bulkInsert('LicenseTerms', [
+      await queryInterface.bulkInsert('license_terms', [
         {
           id: uuidv4(),
           title: 'Monthly Preview License',
           type: 'preview',
-          licenseType: 'monthly',
-          licenseTerms: 'Monthly - 1000 views',
+          license_type: 'monthly',
+          license_terms: 'Monthly - 1000 views',
           amount: 0.00,
           currency: 'USD',
-          copyrightNotice: 'Copyright notice for preview license...',
+          copyright_notice: 'Copyright notice for preview license...',
           license: 'License details for preview...',
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          created_at: new Date(),
+          updated_at: new Date(),
         }
       ], {});
     }
 
     if (!existingTypesArray.includes('licensed')) {
-      await queryInterface.bulkInsert('LicenseTerms', [
+      await queryInterface.bulkInsert('license_terms', [
         {
           id: uuidv4(),
           title: 'Montly License',
           type: 'licensed',
-          licenseType: 'monthly',
-          licenseTerms: 'Monthly - 1000 views',
+          license_type: 'monthly',
+          license_terms: 'Monthly - 1000 views',
           amount: 100.00,
           currency: 'USD',
-          copyrightNotice: 'Copyright notice for licensed license...',
+          copyright_notice: 'Copyright notice for licensed license...',
           license: 'License details for licensed...',
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          created_at: new Date(),
+          updated_at: new Date(),
         }
       ], {});
     }
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('LicenseTerms', null, {});
+    await queryInterface.bulkDelete('license_terms', null, {});
   },
 };

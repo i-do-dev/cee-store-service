@@ -6,22 +6,22 @@ const { QueryTypes } = require('sequelize');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const collections = await queryInterface.sequelize.query(
-      `SELECT * FROM "Collections" WHERE name = 'Default'`,
+      `SELECT * FROM "collection" WHERE name = 'Default'`,
       { type: QueryTypes.SELECT }
     );
 
     if (collections.length === 0) {
-      return queryInterface.bulkInsert('Collections', [{
+      return queryInterface.bulkInsert('collection', [{
         id: uuidv4(),
         name: 'Default',
-        parentCollectionId: null,
-        createdAt: new Date(),
-        updatedAt: new Date()
+        parent_collection_id: null,
+        created_at: new Date(),
+        updated_at: new Date()
       }], {});
     }
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Collections', { name: 'Default' }, {});
+    return queryInterface.bulkDelete('collection', { name: 'Default' }, {});
   }
 };

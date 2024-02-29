@@ -10,10 +10,10 @@ function generateKey(size = 32, format = 'base64') {
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    // skip seeding if there are already select queries for ClientRoles, Clients, and ApiKeys
-    const clientRoleCount = await queryInterface.sequelize.query('SELECT COUNT(id) FROM "ClientRoles"');
-    const clientCount = await queryInterface.sequelize.query('SELECT COUNT(id) FROM "Clients"');
-    const keyCount = await queryInterface.sequelize.query('SELECT COUNT(id) FROM "ApiKeys"');
+    // skip seeding if there are already select queries for client_role, client, and api_key
+    const clientRoleCount = await queryInterface.sequelize.query('SELECT COUNT(id) FROM "client_role"');
+    const clientCount = await queryInterface.sequelize.query('SELECT COUNT(id) FROM "client"');
+    const keyCount = await queryInterface.sequelize.query('SELECT COUNT(id) FROM "api_key"');
 
     if (clientRoleCount[0][0].count > 1 || clientCount[0][0].count > 1 || keyCount[0][0].count > 1) {
       return Promise.resolve(); // Skip the seeding
@@ -25,7 +25,7 @@ module.exports = {
     const publisherClientId = uuidv4();
     const playerClientId = uuidv4();
 
-    await queryInterface.bulkInsert('ClientRoles', [{
+    await queryInterface.bulkInsert('client_role', [{
         id: playerRoleId,
         name: 'cee-player-service',
         description: 'Authorizes the C2E Player to access the relevant resources'
@@ -35,24 +35,24 @@ module.exports = {
         description: 'Authorizes the C2E Publisher to access the relevant resources'
       }], {});
 
-    await queryInterface.bulkInsert('Clients', [{
+    await queryInterface.bulkInsert('client', [{
         id: publisherClientId,
         email: 'testpublisher@curriki.org',
-        clientRoleId: publisherRoleId
+        client_role_id: publisherRoleId
       }, {
         id: playerClientId,
         email: 'testplayer@curriki.org',
-        clientRoleId: playerRoleId
+        client_role_id: playerRoleId
       }], {});
 
-    return queryInterface.bulkInsert('ApiKeys', [{
+    return queryInterface.bulkInsert('api_key', [{
         id: uuidv4(),
         key: generateKey(),
-        clientId: publisherClientId
+        client_id: publisherClientId
       }, {
         id: uuidv4(),
         key: generateKey(),
-        clientId: playerClientId
+        client_id: playerClientId
       }], {});
   },
 
@@ -67,8 +67,8 @@ module.exports = {
     }
   
     // Otherwise, proceed with bulk deletion
-    queryInterface.bulkDelete('ApiKeys', null, {});
-    queryInterface.bulkDelete('Clients', null, {});
-    return queryInterface.bulkDelete('ClientRoles', null, {});
+    queryInterface.bulkDelete('api_key', null, {});
+    queryInterface.bulkDelete('client', null, {});
+    return queryInterface.bulkDelete('client_role', null, {});
   }
 };
